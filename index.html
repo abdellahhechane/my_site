@@ -90,7 +90,7 @@
     <!-- Section Cours -->
     <section id="cours">
         <h2>Les bases de la programmation en C</h2>
-<h1>1.1 Historique</h1>
+<h1>1.Historique</h1>
 <b>Le C a ´et´e con¸cu en 1972 par Dennis Richie et Ken Thompson, chercheurs aux Bell Labs,
 afin de d´evelopper un syst`eme d’exploitation UNIX sur un DEC PDP-11. En 1978, Brian
 Kernighan et Dennis Richie publient la d´efinition classique du C dans le livre The C Pro-
@@ -100,10 +100,50 @@ groupes mirent sur le march´e des compilateurs comportant des extensions partic
 travail s’acheva en 1989 par la d´efinition de la norme ANSI C. Celle-ci fut reprise telle quelle
 par l’ISO (International Standards Organization) en 1990. C’est ce standard, ANSI C, qui est
 d´ecrit dans le pr´esent document.</b>
+        <h2>2.La Compilation</h2>
+        La compilation : la compilation proprement dite traduit le fichier g´en´er´e par le pr´e-
+processeur en assembleur, c’est-`a-dire en une suite d’instructions du microprocesseur
+qui utilisent des mn´emoniques rendant la lecture possible.
+        <h2>3.Les composants ´el´ementaires du C</h2>
+        <h1>3.1 Les identificateurs</h1>
+Le rˆole d’un identificateur est de donner un nom `a une entit´e du programme. Plus pr´eci-
+s´ement, un identificateur peut d´esigner :
+– un nom de variable ou de fonction,
+– un type d´efini par typedef, struct, union ou enum,
+– une ´etiquette.
+Un identificateur est une suite de caract`eres parmi :
+– les lettres (minuscules ou majuscules, mais non accentu´ees),
+– les chiffres,
+– le “blanc soulign´e” ( )
+       <h1> 3.2 Les mots-clefs</h1>
+Un certain nombre de mots, appel´es mots-clefs, sont r´eserv´es pour le langage lui-mˆeme et
+ne peuvent pas ˆetre utilis´es comme identificateurs. L’ANSI C compte 32 mots clefs :
+auto const double float int short struct unsigned
+break continue else for long signed switch void
+case default enum goto register sizeof typedef volatile
+char do extern if return static union while
+que l’on peut ranger en cat´egories
+– les sp´ecificateurs de stockage
+auto register static extern typedef
+– les sp´ecificateurs de type
+char double enum float int long short signed struct
+union unsigned void
+– les qualificateurs de type
+const volatile
+– les instructions de contrˆole
+break case continue default do else for goto if
+switch while
+– divers
+return sizeof
+       <h1>3.3 Les commentaires</h1>
+Un commentaire d´ebute par /* et se termine par */. Par exemple,
+/* Ceci est un commentaire */
+On ne peut pas imbriquer des commentaires. Quand on met en commentaire un morceau de
+programme, il faut donc veiller `a ce que celui-ci ne contienne pas de commentaire.
         <h2>Le Langage C - Introduction</h2>
         <p>Le langage C est un langage de programmation de bas niveau très puissant et largement utilisé. Il est principalement utilisé pour développer des systèmes d'exploitation, des applications embarquées, des jeux vidéo, et d'autres logiciels nécessitant une gestion de bas niveau des ressources.</p>
 
-        <h3>1. Types de données en C</h3>
+        <h3>4. Types de données en C</h3>
         <p>Le langage C propose plusieurs types de données, dont :</p>
         <ul>
             <li><code>int</code> pour les entiers (ex : 1, 42, -7)</li>
@@ -130,13 +170,74 @@ d´ecrit dans le pr´esent document.</b>
         }
         </pre>
 
-        <h3>3. Structures de contrôle</h3>
+        <h3>5. Structures de contrôle</h3>
         <p>Les structures de contrôle permettent de prendre des décisions ou de répéter des actions. Les principales structures sont :</p>
         <ul>
             <li><code>if</code> : exécute une action si une condition est vraie</li>
             <li><code>for</code> : répète une action un nombre défini de fois</li>
             <li><code>while</code> : répète une action tant qu'une condition est vraie</li>
         </ul>
+        <h1>6. Les boucles </h1>
+Les boucles permettent de r´ep´eter une s´erie d’instructions tant qu’une certaine condition
+n’est pas v´erifi´ee.
+<h3>6. la boucle while</h3>
+La syntaxe de while est la suivante :
+while ( expression )
+instruction
+Tant que expression est v´erifi´ee (i.e., non nulle), instruction est ex´ecut´ee. Si expression
+est nulle au d´epart, instruction ne sera jamais ex´ecut´ee. instruction peut ´evidemment ˆetre
+une instruction compos´ee. Par exemple, le programme suivant imprime les entiers de 1 `a 9.
+i = 1;
+while (i < 10)
+{
+printf("\n i = %d",i);
+i++;
+}
+<h3>6.2 Boucle do---while</h3>
+Il peut arriver que l’on ne veuille effectuer le test de continuation qu’apr`es avoir ex´ecut´e
+l’instruction. Dans ce cas, on utilise la boucle do---while. Sa syntaxe est
+do
+instruction
+while ( expression );
+Ici, instruction sera ex´ecut´ee tant que expression est non nulle. Cela signifie donc que
+instruction est toujours ex´ecut´ee au moins une fois. Par exemple, pour saisir au clavier un
+entier entre 1 et 10 :
+int a;
+do
+A. Canteaut - Programmation en langage C 27
+{
+printf("\n Entrez un entier entre 1 et 10 : ");
+scanf("%d",&a);
+}
+while ((a <= 0) || (a > 10));
+    <h3>6.3 Boucle for</h3>
+La syntaxe de for est :
+for ( expr 1 ; expr 2 ; expr 3)
+instruction
+Une version ´equivalente plus intuitive est :
+expr 1;
+while ( expr 2 )
+{
+instruction
+expr 3;
+}
+Par exemple, pour imprimer tous les entiers de 0 `a 9, on ´ecrit :
+for (i = 0; i < 10; i++)
+printf("\n i = %d",i);
+A la fin de cette boucle, i vaudra 10. Les trois expressions utilis´ees dans une boucle for
+peuvent ˆetre constitu´ees de plusieurs expressions s´epar´ees par des virgules. Cela permet par
+exemple de faire plusieurs initialisations `a la fois. Par exemple, pour calculer la factorielle
+d’un entier, on peut ´ecrire :
+int n, i, fact;
+for (i = 1, fact = 1; i <= n; i++)
+fact *= i;
+printf("%d ! = %d \n",n,fact);
+On peut ´egalement ins´erer l’instruction fact *= i; dans la boucle for ce qui donne :
+int n, i, fact;
+for (i = 1, fact = 1; i <= n; fact *= i, i++);
+printf("%d ! = %d \n",n,fact);
+On ´evitera toutefois ce type d’acrobaties qui n’apportent rien et rendent le programme diffi-
+cilement lisible.
 
         <pre>
         if (a > b) {
@@ -148,13 +249,13 @@ d´ecrit dans le pr´esent document.</b>
         }
         </pre>
 
-        <h3>4. Tableaux</h3>
+        <h3>6. Tableaux</h3>
         <p>Un tableau est une collection de variables du même type, stockées dans des cases contiguës. Exemple :</p>
         <pre>
         int tableau[5] = {1, 2, 3, 4, 5};
         </pre>
 
-        <h3>5. Pointeurs</h3>
+        <h3>7. Pointeurs</h3>
         <p>Les pointeurs sont des variables qui stockent l'adresse mémoire d'une autre variable. Exemple :</p>
         <pre>
         int x = 10;
@@ -162,7 +263,7 @@ d´ecrit dans le pr´esent document.</b>
         printf("%d", *p);  // affiche la valeur de x via le pointeur p
         </pre>
 
-        <h3>6. Structures</h3>
+        <h3>8. Structures</h3>
         <p>Les structures permettent de regrouper différentes données sous une seule unité. Exemple :</p>
         <pre>
         struct Personne {
@@ -173,25 +274,14 @@ d´ecrit dans le pr´esent document.</b>
         struct Personne p1 = {"Alice", 25};
         </pre>
 
-        <h3>7. Les commentaires</h3>
-        <p>Les commentaires sont utilisés pour expliquer le code. Il existe deux types de commentaires :</p>
-        <ul>
-            <li><code>//</code> : commentaire sur une ligne</li>
-            <li><code>/* */</code> : commentaire sur plusieurs lignes</li>
-        </ul>
-        <pre>
-        // Ceci est un commentaire sur une ligne
-        /* Ceci est un
-           commentaire sur plusieurs lignes */
-        </pre>
-
-        <h3>8. Compilateur C et Exécution</h3>
+        <h3>9. Compilateur C et Exécution</h3>
         <p>Pour exécuter un programme en C, vous devez d'abord le compiler avec un compilateur, tel que GCC. Une fois compilé, vous pouvez exécuter le programme via la ligne de commande :</p>
         <pre>
         gcc programme.c -o programme
         ./programme
         </pre>
-    </section>
+    </section
+        >
 
     <!-- Quiz Section -->
     <section id="quiz">
