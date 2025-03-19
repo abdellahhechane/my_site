@@ -1,274 +1,367 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تعلم البرمجة بلغة بايثون</title>
-
-    <!-- Open Graph meta tags pour Facebook -->
-    <meta property="og:title" content="تعلم البرمجة بلغة بايثون" />
-    <meta property="og:description" content="دليل تعلم البرمجة بلغة بايثون خطوة بخطوة." />
-    <meta property="og:image" content="https://www.example.com/your-image.jpg" />
-    <meta property="og:url" content="https://www.example.com" />
-    <meta property="og:type" content="website" />
-
+    <title>Apprendre le Langage C - Cours et Quiz</title>
     <style>
-        /* Styles globaux */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f3f4f6;
+            background-color: #f0f0f0;
+            color: #333;
             margin: 0;
             padding: 0;
-            color: #333;
-            direction: rtl; /* Texte en arabe de droite à gauche */
         }
-
         header {
-            background-color: #007BFF;
+            background-color: #2c3e50;
             color: white;
-            padding: 20px;
             text-align: center;
-            border-bottom: 3px solid #0056b3;
+            padding: 40px;
         }
-
-        header h1 {
-            font-size: 2.5em;
-            margin: 0;
+        nav {
+            background-color: #34495e;
+            overflow: hidden;
         }
-
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        nav ul li {
-            display: inline;
-            margin: 0 15px;
-        }
-
-        nav ul li a {
+        nav a {
+            float: left;
+            display: block;
             color: white;
+            padding: 14px 20px;
+            text-align: center;
             text-decoration: none;
-            font-size: 1.1em;
-            padding: 10px 15px;
-            background-color: #0056b3;
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
         }
-
-        nav ul li a:hover {
-            background-color: #FFD700;
-            color: #333;
+        nav a:hover {
+            background-color: #2980b9;
         }
-
         section {
-            display: none;
-            margin: 30px auto;
             padding: 20px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
+            margin: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
         }
-
-        section h2 {
-            color: #007BFF;
-            font-size: 1.8em;
-            margin-bottom: 10px;
-        }
-
-        section p, section ol {
-            font-size: 1.1em;
-            line-height: 1.6;
-            color: #555;
-        }
-
-        footer {
-            background-color: #333;
+        .btn {
+            background-color: #2980b9;
             color: white;
-            text-align: center;
-            padding: 15px 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            font-size: 1em;
-        }
-
-        .card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        #accueil {
-            background-color: #e9f7fc;
-        }
-
-        #etape1 {
-            background-color: #e6f7ff;
-        }
-
-        #etape2 {
-            background-color: #fff3e6;
-        }
-
-        #etape3 {
-            background-color: #e6ffe6;
-        }
-
-        #about {
-            background-color: #f2e6ff;
-        }
-
-        #date {
-            font-weight: bold;
-            color: #007BFF;
-        }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2em;
-            }
-
-            nav ul li {
-                display: block;
-                margin: 10px 0;
-            }
-
-            section {
-                margin: 20px;
-                padding: 15px;
-            }
-        }
-
-        .whatsapp-btn {
-            background-color: #25D366;
-            color: white;
+            padding: 10px 20px;
             border: none;
-            padding: 15px;
-            font-size: 1.2em;
-            border-radius: 10px;
             cursor: pointer;
             text-align: center;
-            margin-top: 20px;
-            transition: background-color 0.3s;
+            display: inline-block;
+            margin: 10px 0;
+            border-radius: 5px;
         }
-
-        .whatsapp-btn:hover {
-            background-color: #128C7E;
+        .btn:hover {
+            background-color: #3498db;
+        }
+        .quiz {
+            background-color: #f7b731;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .quiz-answer {
+            display: none; /* Correct answer hidden by default */
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #27ae60;
+            color: white;
+            border-radius: 5px;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
         }
     </style>
 </head>
 <body>
+
+    <!-- Header -->
     <header>
-        <h1>تعلم البرمجة بلغة بايثون</h1>
-        <nav>
-            <ul>
-                <li><a href="#" onclick="showSection('accueil')">الصفحة الرئيسية</a></li>
-                <li><a href="#" onclick="showSection('etape1')">الخطوة 1: تثبيت بايثون</a></li>
-                <li><a href="#" onclick="showSection('etape2')">الخطوة 2: كتابة أول برنامج بايثون</a></li>
-                <li><a href="#" onclick="showSection('etape3')">الخطوة 3: تنفيذ البرنامج</a></li>
-                <li><a href="#" onclick="showSection('about')">حول</a></li>
-            </ul>
-        </nav>
+        <h1>Apprendre le Langage C - Cours et Quiz</h1>
+        <p>Apprenez les bases du langage C et testez vos connaissances avec des quiz interactifs !</p>
     </header>
 
-    <section id="accueil" class="card">
-        <h2>الصفحة الرئيسية</h2>
-        <p>هذا الموقع هو دليل لتعلم البرمجة بلغة بايثون. ستتعلم كيفية تثبيت بايثون، كتابة أول برنامج، وتنفيذه على جهازك.</p>
-        <p id="date"></p> <!-- Date actuelle -->
-        <button class="whatsapp-btn" onclick="shareOnWhatsApp()">مشاركة على واتساب</button>
-    </section>
+    <!-- Section Cours -->
+    <section id="cours">
+        <h2>Le Langage C - Introduction</h2>
+        <p>Le langage C est un langage de programmation de bas niveau très puissant et largement utilisé. Il est principalement utilisé pour développer des systèmes d'exploitation, des applications embarquées, des jeux vidéo, et d'autres logiciels nécessitant une gestion de bas niveau des ressources.</p>
 
-    <section id="etape1" class="card">
-        <h2>الخطوة 1: تثبيت بايثون</h2>
-        <p>في هذه الخطوة، سنقوم بتثبيت بايثون على جهازك. اتبع الخطوات التالية:</p>
-        <ol>
-            <li>اذهب إلى موقع بايثون الرسمي: <a href="https://www.python.org/downloads/" target="_blank">https://www.python.org/downloads/</a>.</li>
-            <li>اختر النسخة المناسبة لنظام التشغيل الذي تستخدمه (Windows, macOS, Linux).</li>
-            <li>قم بتثبيت بايثون باتباع التعليمات المعروضة على الشاشة.</li>
-            <li>بعد التثبيت، افتح موجه الأوامر (Command Prompt) واكتب <code>python --version</code> للتأكد من أن بايثون تم تثبيته بنجاح.</li>
-        </ol>
-    </section>
+        <h3>1. Types de données en C</h3>
+        <p>Le langage C propose plusieurs types de données, dont :</p>
+        <ul>
+            <li><code>int</code> pour les entiers (ex : 1, 42, -7)</li>
+            <li><code>float</code> pour les nombres à virgule flottante (ex : 3.14, 9.99)</li>
+            <li><code>char</code> pour les caractères (ex : 'a', 'b', '1')</li>
+            <li><code>double</code> pour les nombres à virgule flottante de double précision</li>
+        </ul>
 
-    <section id="etape2" class="card">
-        <h2>الخطوة 2: كتابة أول برنامج بايثون</h2>
-        <p>الآن بعد أن قمت بتثبيت بايثون، حان الوقت لكتابة أول برنامج بايثون. اتبع هذه الخطوات:</p>
-        <ol>
-            <li>افتح محرر النصوص المفضل لديك (مثل Notepad++ أو Visual Studio Code).</li>
-            <li>اكتب الكود التالي:</li>
-        </ol>
         <pre>
-            <code>
-print("مرحبًا، بايثون!")
-            </code>
+        int a = 5;
+        float b = 3.14;
+        char c = 'A';
         </pre>
-        <p>هذا الكود يقوم بطباعة الجملة "مرحبًا، بايثون!" على الشاشة.</p>
+
+        <h3>2. Déclaration et utilisation des fonctions</h3>
+        <p>Les fonctions en C sont utilisées pour organiser le code en blocs réutilisables. Voici un exemple simple de fonction :</p>
+        <pre>
+        void afficherMessage() {
+            printf("Bonjour, bienvenue en C !");
+        }
+
+        int additionner(int x, int y) {
+            return x + y;
+        }
+        </pre>
+
+        <h3>3. Structures de contrôle</h3>
+        <p>Les structures de contrôle permettent de prendre des décisions ou de répéter des actions. Les principales structures sont :</p>
+        <ul>
+            <li><code>if</code> : exécute une action si une condition est vraie</li>
+            <li><code>for</code> : répète une action un nombre défini de fois</li>
+            <li><code>while</code> : répète une action tant qu'une condition est vraie</li>
+        </ul>
+
+        <pre>
+        if (a > b) {
+            printf("a est plus grand que b");
+        }
+
+        for (int i = 0; i < 5; i++) {
+            printf("%d", i);
+        }
+        </pre>
+
+        <h3>4. Tableaux</h3>
+        <p>Un tableau est une collection de variables du même type, stockées dans des cases contiguës. Exemple :</p>
+        <pre>
+        int tableau[5] = {1, 2, 3, 4, 5};
+        </pre>
+
+        <h3>5. Pointeurs</h3>
+        <p>Les pointeurs sont des variables qui stockent l'adresse mémoire d'une autre variable. Exemple :</p>
+        <pre>
+        int x = 10;
+        int *p = &x;  // p est un pointeur vers x
+        printf("%d", *p);  // affiche la valeur de x via le pointeur p
+        </pre>
+
+        <h3>6. Structures</h3>
+        <p>Les structures permettent de regrouper différentes données sous une seule unité. Exemple :</p>
+        <pre>
+        struct Personne {
+            char nom[50];
+            int age;
+        };
+
+        struct Personne p1 = {"Alice", 25};
+        </pre>
+
+        <h3>7. Les commentaires</h3>
+        <p>Les commentaires sont utilisés pour expliquer le code. Il existe deux types de commentaires :</p>
+        <ul>
+            <li><code>//</code> : commentaire sur une ligne</li>
+            <li><code>/* */</code> : commentaire sur plusieurs lignes</li>
+        </ul>
+        <pre>
+        // Ceci est un commentaire sur une ligne
+        /* Ceci est un
+           commentaire sur plusieurs lignes */
+        </pre>
+
+        <h3>8. Compilateur C et Exécution</h3>
+        <p>Pour exécuter un programme en C, vous devez d'abord le compiler avec un compilateur, tel que GCC. Une fois compilé, vous pouvez exécuter le programme via la ligne de commande :</p>
+        <pre>
+        gcc programme.c -o programme
+        ./programme
+        </pre>
     </section>
 
-    <section id="etape3" class="card">
-        <h2>الخطوة 3: تنفيذ البرنامج</h2>
-        <p>لتنفيذ البرنامج الذي كتبته، اتبع الخطوات التالية:</p>
-        <ol>
-            <li>احفظ الملف الذي كتبته بصيغة <code>.py</code>، مثل <code>my_first_program.py</code>.</li>
-            <li>افتح موجه الأوامر (Command Prompt) وتوجه إلى المجلد الذي حفظت فيه الملف.</li>
-            <li>اكتب الأمر التالي لتشغيل البرنامج:</li>
-            <pre>
-            <code>python my_first_program.py</code>
-            </pre>
-            <li>إذا كنت قد قمت بكل شيء بشكل صحيح، سترى النص "مرحبًا، بايثون!" يظهر في موجه الأوامر.</li>
-        </ol>
+    <!-- Quiz Section -->
+    <section id="quiz">
+        <h2>Testez vos connaissances sur le langage C !</h2>
+
+        <!-- Quiz 1 -->
+        <div class="quiz" id="quiz-1">
+            <h3>1. Quel est le type de données pour une variable entière en C ?</h3>
+            <button class="btn" onclick="checkAnswer('q1', 'int')">int</button>
+            <button class="btn" onclick="checkAnswer('q1', 'float')">float</button>
+            <button class="btn" onclick="checkAnswer('q1', 'char')">char</button>
+            <div id="q1-answer" class="quiz-answer">Bonne réponse ! Le type de données pour une variable entière en C est "int".</div>
+        </div>
+
+        <!-- Quiz 2 -->
+        <div class="quiz" id="quiz-2">
+            <h3>2. Quel mot-clé est utilisé pour définir une fonction en C ?</h3>
+            <button class="btn" onclick="checkAnswer('q2', 'function')">function</button>
+            <button class="btn" onclick="checkAnswer('q2', 'void')">void</button>
+            <button class="btn" onclick="checkAnswer('q2', 'return')">return</button>
+            <div id="q2-answer" class="quiz-answer">Bonne réponse ! Le mot-clé pour définir une fonction en C est "void".</div>
+        </div>
+
+        <!-- Quiz 3 -->
+        <div class="quiz" id="quiz-3">
+            <h3>3. Comment déclarer un tableau de 10 entiers en C ?</h3>
+            <button class="btn" onclick="checkAnswer('q3', 'int arr[10]')">int arr[10]</button>
+            <button class="btn" onclick="checkAnswer('q3', 'int arr{10}')">int arr{10}</button>
+            <button class="btn" onclick="checkAnswer('q3', 'arr[10]')">arr[10]</button>
+            <div id="q3-answer" class="quiz-answer">Bonne réponse ! Un tableau de 10 entiers en C se déclare avec "int arr[10]".</div>
+        </div>
+
+        <!-- Quiz 4 -->
+        <div class="quiz" id="quiz-4">
+            <h3>4. Quel est le résultat de cette opération : 5 + 3 * 2 ?</h3>
+            <button class="btn" onclick="checkAnswer('q4', '16')">16</button>
+            <button class="btn" onclick="checkAnswer('q4', '11')">11</button>
+            <button class="btn" onclick="checkAnswer('q4', '13')">13</button>
+            <div id="q4-answer" class="quiz-answer">Bonne réponse ! L'ordre des opérations donne 11 (3*2 puis 5+6).</div>
+        </div>
+
+        <!-- Quiz 5 -->
+        <div class="quiz" id="quiz-5">
+            <h3>5. Quelle fonction permet d'afficher du texte à l'écran ?</h3>
+            <button class="btn" onclick="checkAnswer('q5', 'print()')">print()</button>
+            <button class="btn" onclick="checkAnswer('q5', 'printf()')">printf()</button>
+            <button class="btn" onclick="checkAnswer('q5', 'echo()')">echo()</button>
+            <div id="q5-answer" class="quiz-answer">Bonne réponse ! En C, on utilise la fonction "printf()".</div>
+        </div>
+
+        <!-- Quiz 6 -->
+        <div class="quiz" id="quiz-6">
+            <h3>6. Comment déclarer une fonction qui retourne un entier en C ?</h3>
+            <button class="btn" onclick="checkAnswer('q6', 'void maFonction()')">void maFonction()</button>
+            <button class="btn" onclick="checkAnswer('q6', 'int maFonction()')">int maFonction()</button>
+            <button class="btn" onclick="checkAnswer('q6', 'float maFonction()')">float maFonction()</button>
+            <div id="q6-answer" class="quiz-answer">Bonne réponse ! Une fonction qui retourne un entier se déclare avec "int".</div>
+        </div>
+
+        <!-- Quiz 7 -->
+        <div class="quiz" id="quiz-7">
+            <h3>7. Quelle est la taille d'un int en C sur la plupart des systèmes modernes ?</h3>
+            <button class="btn" onclick="checkAnswer('q7', '4 octets')">4 octets</button>
+            <button class="btn" onclick="checkAnswer('q7', '8 octets')">8 octets</button>
+            <button class="btn" onclick="checkAnswer('q7', '2 octets')">2 octets</button>
+            <div id="q7-answer" class="quiz-answer">Bonne réponse ! Sur la plupart des systèmes modernes, un "int" fait 4 octets.</div>
+        </div>
+
+        <!-- Quiz 8 -->
+        <div class="quiz" id="quiz-8">
+            <h3>8. Que fait l'opérateur & en C ?</h3>
+            <button class="btn" onclick="checkAnswer('q8', 'Il donne l\'adresse mémoire d\'une variable')">Il donne l'adresse mémoire d'une variable</button>
+            <button class="btn" onclick="checkAnswer('q8', 'Il retourne la valeur de la variable')">Il retourne la valeur de la variable</button>
+            <button class="btn" onclick="checkAnswer('q8', 'Il divise la valeur')">Il divise la valeur</button>
+            <div id="q8-answer" class="quiz-answer">Bonne réponse ! L'opérateur & est utilisé pour obtenir l'adresse mémoire d'une variable (pointeur).</div>
+        </div>
+
+        <!-- Quiz 9 -->
+        <div class="quiz" id="quiz-9">
+            <h3>9. Quelle fonction permet de libérer de la mémoire allouée dynamiquement ?</h3>
+            <button class="btn" onclick="checkAnswer('q9', 'free()')">free()</button>
+            <button class="btn" onclick="checkAnswer('q9', 'malloc()')">malloc()</button>
+            <button class="btn" onclick="checkAnswer('q9', 'alloc()')">alloc()</button>
+            <div id="q9-answer" class="quiz-answer">Bonne réponse ! La fonction "free()" est utilisée pour libérer de la mémoire dynamique.</div>
+        </div>
+
+        <!-- Quiz 10 -->
+        <div class="quiz" id="quiz-10">
+            <h3>10. Quel est l'ordre de déclaration des arguments d'une fonction en C ?</h3>
+            <button class="btn" onclick="checkAnswer('q10', 'Type suivi du nom de la variable')">Type suivi du nom de la variable</button>
+            <button class="btn" onclick="checkAnswer('q10', 'Nom de la variable suivi du type')">Nom de la variable suivi du type</button>
+            <button class="btn" onclick="checkAnswer('q10', 'Aucun ordre')">Aucun ordre</button>
+            <div id="q10-answer" class="quiz-answer">Bonne réponse ! En C, l'ordre est "Type suivi du nom de la variable".</div>
+        </div>
+
+        <!-- Quiz 11 -->
+        <div class="quiz" id="quiz-11">
+            <h3>11. Que signifie "segfault" en C ?</h3>
+            <button class="btn" onclick="checkAnswer('q11', 'Erreur de segmentation')">Erreur de segmentation</button>
+            <button class="btn" onclick="checkAnswer('q11', 'Erreur de compilation')">Erreur de compilation</button>
+            <button class="btn" onclick="checkAnswer('q11', 'Erreur d\'allocation mémoire')">Erreur d'allocation mémoire</button>
+            <div id="q11-answer" class="quiz-answer">Bonne réponse ! Un "segfault" signifie une erreur de segmentation, souvent causée par l'accès à une zone mémoire non valide.</div>
+        </div>
+
+        <!-- Quiz 12 -->
+        <div class="quiz" id="quiz-12">
+            <h3>12. Que permet de faire la fonction <code>scanf()</code> ?</h3>
+            <button class="btn" onclick="checkAnswer('q12', 'Lire une entrée de l\'utilisateur')">Lire une entrée de l'utilisateur</button>
+            <button class="btn" onclick="checkAnswer('q12', 'Afficher une sortie')">Afficher une sortie</button>
+            <button class="btn" onclick="checkAnswer('q12', 'Allouer de la mémoire')">Allouer de la mémoire</button>
+            <div id="q12-answer" class="quiz-answer">Bonne réponse ! La fonction "scanf()" est utilisée pour lire des données de l'utilisateur.</div>
+        </div>
+
+        <!-- Quiz 13 -->
+        <div class="quiz" id="quiz-13">
+            <h3>13. Comment déclarer une variable de type structure en C ?</h3>
+            <button class="btn" onclick="checkAnswer('q13', 'struct Personne p1')">struct Personne p1</button>
+            <button class="btn" onclick="checkAnswer('q13', 'struct p1')">struct p1</button>
+            <button class="btn" onclick="checkAnswer('q13', 'struct {Personne} p1')">struct {Personne} p1</button>
+            <div id="q13-answer" class="quiz-answer">Bonne réponse ! Une variable de type structure se déclare avec "struct NomDeLaStructure nomDeVariable".</div>
+        </div>
+
+        <!-- Quiz 14 -->
+        <div class="quiz" id="quiz-14">
+            <h3>14. Qu'est-ce qu'un pointeur en C ?</h3>
+            <button class="btn" onclick="checkAnswer('q14', 'Une variable qui contient l\'adresse mémoire d\'une autre variable')">Une variable qui contient l'adresse mémoire d'une autre variable</button>
+            <button class="btn" onclick="checkAnswer('q14', 'Une variable de type entier')">Une variable de type entier</button>
+            <button class="btn" onclick="checkAnswer('q14', 'Une fonction')">Une fonction</button>
+            <div id="q14-answer" class="quiz-answer">Bonne réponse ! Un pointeur est une variable qui contient l'adresse mémoire d'une autre variable.</div>
+        </div>
+
+        <!-- Quiz 15 -->
+        <div class="quiz" id="quiz-15">
+            <h3>15. Qu'est-ce qu'une variable globale en C ?</h3>
+            <button class="btn" onclick="checkAnswer('q15', 'Une variable accessible depuis toutes les fonctions')">Une variable accessible depuis toutes les fonctions</button>
+            <button class="btn" onclick="checkAnswer('q15', 'Une variable utilisée uniquement dans une fonction')">Une variable utilisée uniquement dans une fonction</button>
+            <button class="btn" onclick="checkAnswer('q15', 'Une variable constante')">Une variable constante</button>
+            <div id="q15-answer" class="quiz-answer">Bonne réponse ! Une variable globale est accessible depuis toutes les fonctions de votre programme.</div>
+        </div>
     </section>
 
-    <section id="about" class="card">
-        <h2>حول</h2>
-        <p>هذا الموقع هو دليل تعليمي للمبتدئين لتعلم البرمجة باستخدام لغة بايثون. من خلال هذا الموقع، ستتمكن من تعلم أساسيات البرمجة خطوة بخطوة.</p>
-    </section>
-
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2025 تعلم البرمجة | جميع الحقوق محفوظة</p>
+        <p>&copy; 2025 Apprendre le Langage C - Tous droits réservés.</p>
     </footer>
 
-    <!-- JavaScript -->
     <script>
-        function afficherDate() {
-            const dateElement = document.getElementById("date");
-            const today = new Date();
-            const dateStr = today.toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' });
-            dateElement.textContent = `اليوم: ${dateStr}`;
-        }
+        function checkAnswer(quizId, answer) {
+            var correctAnswers = {
+                q1: 'int',
+                q2: 'void',
+                q3: 'int arr[10]',
+                q4: '11',
+                q5: 'printf()',
+                q6: 'int maFonction()',
+                q7: '4 octets',
+                q8: 'Il donne l\'adresse mémoire d\'une variable',
+                q9: 'free()',
+                q10: 'Type suivi du nom de la variable',
+                q11: 'Erreur de segmentation',
+                q12: 'Lire une entrée de l\'utilisateur',
+                q13: 'struct Personne p1',
+                q14: 'Une variable qui contient l\'adresse mémoire d\'une autre variable',
+                q15: 'Une variable accessible depuis toutes les fonctions'
+            };
 
-        function showSection(id) {
-            // إخفاء جميع الأقسام
-            const sections = document.querySelectorAll('section');
-            sections.forEach(section => section.style.display = 'none');
-            
-            // عرض القسم المحدد
-            const selectedSection = document.getElementById(id);
-            if (selectedSection) {
-                selectedSection.style.display = 'block';
+            var answerDiv = document.getElementById(quizId + '-answer');
+            if (answer === correctAnswers[quizId]) {
+                answerDiv.style.backgroundColor = "#27ae60";
+                answerDiv.style.display = "block";
+            } else {
+                answerDiv.style.backgroundColor = "#e74c3c";
+                answerDiv.style.display = "block";
+                answerDiv.innerHTML = "Mauvaise réponse, réessayez !";
             }
         }
-
-        function shareOnWhatsApp() {
-            const url = encodeURIComponent(window.location.href);
-            const message = encodeURIComponent('تعلم البرمجة بلغة بايثون: ' + url);
-            window.open('https://wa.me/?text=' + message, '_blank');
-        }
-
-        afficherDate();
-        showSection('accueil'); // عرض الصفحة الرئيسية بشكل افتراضي
     </script>
+
 </body>
 </html>
 
 
-    
+
+
