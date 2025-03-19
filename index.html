@@ -498,10 +498,12 @@ printf("norme de (%f + i %f) = %f \n",z.reelle,z.imaginaire,norme);
             if (answer === correctAnswers[quizId]) {
                 answerDiv.style.backgroundColor = "#27ae60";
                 answerDiv.style.display = "block";
+                answerDiv.innerHTML = "Bonne réponse ! Un pointeur est une variable qui contient l'adresse mémoire d'une autre variable.";
             } else {
                 answerDiv.style.backgroundColor = "#e74c3c";
                 answerDiv.style.display = "block";
                 answerDiv.innerHTML = "Mauvaise réponse, réessayez !";
+                
             }
         }
     </script>
