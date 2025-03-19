@@ -180,7 +180,7 @@ programme, il faut donc veiller `a ce que celui-ci ne contienne pas de commentai
         <h1>6. Les boucles </h1>
 Les boucles permettent de r´ep´eter une s´erie d’instructions tant qu’une certaine condition
 n’est pas v´erifi´ee.
-<h3>6. la boucle while</h3>
+<h3>6.1 la boucle while</h3>
 La syntaxe de while est la suivante :
 while ( expression )
 instruction
@@ -249,13 +249,36 @@ cilement lisible.
         }
         </pre>
 
-        <h3>6. Tableaux</h3>
-        <p>Un tableau est une collection de variables du même type, stockées dans des cases contiguës. Exemple :</p>
-        <pre>
-        int tableau[5] = {1, 2, 3, 4, 5};
-        </pre>
+        <h3>7. Tableaux</h3>
+        <p>Un tableau est un ensemble fini d’´el´ements de mˆeme type, stock´es en m´emoire `a des
+adresses contigu¨es.
+La d´eclaration d’un tableau `a une dimension se fait de la fa¸con suivante :
+type nom-du-tableau[nombre-´el´ements];
+o`u nombre-´el´ements est une expression constante enti`ere positive. Par exemple, la d´eclaration
+int tab[10]; indique que tab est un tableau de 10 ´el´ements de type int. Cette d´eclaration
+alloue donc en m´emoire pour l’objet tab un espace de 10 × 4 octets cons´ecutifs.
+Pour plus de clart´e, il est recommand´e de donner un nom `a la constante nombre-´el´ements
+par une directive au pr´eprocesseur, par exemple
+#define nombre-´el´ements 10
+On acc`ede `a un ´el´ement du tableau en lui appliquant l’op´erateur []. Les ´el´ements d’un
+tableau sont toujours num´erot´es de 0 `a nombre-´el´ements -1. Le programme suivant imprime
+les ´el´ements du tableau tab :
+<pre>#define N 10
+main()
+{
+int tab[N];
+int i;
+...
+for (i = 0; i < N; i++)
+printf("tab[%d] = %d\n",i,tab[i]);
+}
+</pre>
+Un tableau correspond en fait `a un pointeur vers le premier ´el´ement du tableau. Ce pointeur
+est constant. Cela implique en particulier qu’aucune op´eration globale n’est autoris´ee sur un
+tableau. Notamment, un tableau ne peut pas figurer `a gauche d’un op´erateur d’affectation.</p>
+      
 
-        <h3>7. Pointeurs</h3>
+        <h3>8. Pointeurs</h3>
         <p>Les pointeurs sont des variables qui stockent l'adresse mémoire d'une autre variable. Exemple :</p>
         <pre>
         int x = 10;
@@ -263,18 +286,41 @@ cilement lisible.
         printf("%d", *p);  // affiche la valeur de x via le pointeur p
         </pre>
 
-        <h3>8. Structures</h3>
-        <p>Les structures permettent de regrouper différentes données sous une seule unité. Exemple :</p>
+        <h3>9. Structures</h3>
+        <p>Une structure est une suite finie d’objets de types diff´erents. Contrairement aux tableaux,
+les diff´erents ´el´ements d’une structure n’occupent pas n´ecessairement des zones contigu¨es
+en m´emoire. Chaque ´el´ement de la structure, appel´e membre ou champ, est d´esign´e par un
+identificateur.
+On distingue la d´eclaration d’un mod`ele de structure de celle d’un objet de type structure
+correspondant `a un mod`ele donn´e. La d´eclaration d’un mod`ele de structure dont l’identifica-
+teur est modele suit la syntaxe suivante :
+struct modele
+{
+type-1 membre-1;
+type-2 membre-2;
+...
+type-n membre-n;
+};</p>
+   <b> Exmple:</b>
         <pre>
-        struct Personne {
-            char nom[50];
-            int age;
-        };
-
-        struct Personne p1 = {"Alice", 25};
+     #include <math.h>
+struct complexe
+{
+double reelle;
+double imaginaire;
+};
+main()
+{
+struct complexe z;
+double norme;
+...
+norme = sqrt(z.reelle * z.reelle + z.imaginaire * z.imaginaire);
+printf("norme de (%f + i %f) = %f \n",z.reelle,z.imaginaire,norme);
+}
+         struct complexe z = {2. , 2.};
         </pre>
 
-        <h3>9. Compilateur C et Exécution</h3>
+        <h3>10. Compilateur C et Exécution</h3>
         <p>Pour exécuter un programme en C, vous devez d'abord le compiler avec un compilateur, tel que GCC. Une fois compilé, vous pouvez exécuter le programme via la ligne de commande :</p>
         <pre>
         gcc programme.c -o programme
